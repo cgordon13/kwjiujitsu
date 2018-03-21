@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -172,7 +173,17 @@ public class Main2Activity extends AppCompatActivity {
 
                 return true;
             case R.id.action_deleteCard:
-                mSectionsPagerAdapter.delete(mViewPager.getCurrentItem());
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Delete")
+                        .setMessage("Delete card?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                mSectionsPagerAdapter.delete(mViewPager.getCurrentItem());
+                            }})
+                        .setNegativeButton(android.R.string.no, null).show();
                 return true;
 
             default:
@@ -266,15 +277,16 @@ public class Main2Activity extends AppCompatActivity {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
-//            printFileNames();
             updateFiles();
         }
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(subFiles[position].getAbsolutePath());
+            if (subFiles.length == 0) {
+                return NoCardsFragment.newInstance();
+            } else {
+                return PlaceholderFragment.newInstance(subFiles[position].getAbsolutePath());
+            }
         }
 
         public void refresh() {
@@ -299,7 +311,11 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return subFiles.length;
+            if (subFiles.length == 0) {
+                return 1;
+            } else {
+                return subFiles.length;
+            }
         }
     }
 }
