@@ -5,12 +5,11 @@
     android:layout_height="match_parent"
     tools:context="com.cgordon.kwjiujitsu.NoCardsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Add a card using the menu"
+        android:text="@string/Greeting_message"
 
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#000000" />
@@ -22,6 +21,7 @@
         android:src="@drawable/kwjj_logo"
         android:gravity="center"
         android:alpha="0.05"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        android:contentDescription="@string/background_image" />
 
 </FrameLayout>

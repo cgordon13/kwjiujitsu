@@ -2,8 +2,8 @@ package com.cgordon.kwjiujitsu;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,7 +16,6 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -83,8 +82,25 @@ public class AddCardActivity extends AppCompatActivity implements TextWatcher {
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }
-                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+//                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+//                Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+
+                int bitMatrixWidth = bitMatrix.getWidth();
+                int bitMatrixHeight = bitMatrix.getHeight();
+                int[] pixels = new int[bitMatrixWidth * bitMatrixHeight];
+
+                int colorWhite = 0xFFFFFFFF;
+                int colorBlack = 0xFF000000;
+
+                for (int y = 0; y < bitMatrixHeight; y++) {
+                    int offset = y * bitMatrixWidth;
+                    for (int x = 0; x < bitMatrixWidth; x++) {
+                        pixels[offset + x] = bitMatrix.get(x, y) ? colorBlack : colorWhite;
+                    }
+                }
+                Bitmap bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444);
+
+                bitmap.setPixels(pixels, 0, 1024, 0, 0, bitMatrixWidth, bitMatrixHeight);
 
                 FileOutputStream out = null;
                 try {

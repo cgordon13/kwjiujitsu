@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.cgordon.kwjiujitsu.MainActivity">
     <item
-        android:id="@+id/action_scanMembership"
+        android:id="@+id/action_addCard"
         android:orderInCategory="100"
-        android:title="@string/action_scanMembership"
+        android:title="@string/action_add_card"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_deleteCard"
+        android:orderInCategory="100"
+        android:title="@string/action_delete_card"
+        app:showAsAction="never" />
+
 </menu>
