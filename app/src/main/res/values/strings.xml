@@ -2,7 +2,7 @@
     <string name="app_name">KW Jiu Jitsu</string>
     <string name="action_add_card">Add Card</string>
     <string name="action_delete_card">Delete Card</string>
-    <string name="Greeting_message">Add a card using the menu</string>
+    <string name="Greeting_message">Add a card using the menu.\n\nYour Member # is on your card.</string>
     <string name="add_member">Add Member</string>
     <string name="name">Name</string>
     <string name="member_number">Member #</string>
